@@ -134,3 +134,27 @@ make html
 
 The output will be stored in the ``_build_sphinx`` folder. You may check for
 other output formats other than HTML by running ``make help``.
+
+# Quick Start guide
+https://github.com/zephyrproject-rtos/zephyr/discussions/77990
+```shell
+sudo apt install pre-requisites
+mkdir ~/my-workspace
+cd my-workspace
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+```shell
+pip install west
+west init -m https://github.com/zephyrproject-rtos/example-application --mr main my-workspace
+cd my-workspace
+west update
+west packages pip --install
+
+cd example-application
+west build -b nucleo_f302r8 app
+
+west build -b nucleo_f302r8 app -- -DEXTRA_CONF_FILE=debug.conf
+west flash
+```
